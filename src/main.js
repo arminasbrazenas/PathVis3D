@@ -24,7 +24,8 @@ function prepareThreeScene()
     scene.background = new THREE.Color(0x1a1a1a);
 
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 50000);
-    camera.position.set(-434, 863, -423);
+    //camera.position.set(-434, 863, -423);
+    camera.position.set(-0.9036 * window.innerWidth + 3037 , -0.6972 * window.innerWidth + 2016, -423);
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -49,7 +50,7 @@ function prepareThreeScene()
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.maxPolarAngle = Math.PI / 2; //-- Limit camera rotation to ground --//
     controls.minDistance = 100;
-    window.innerWidth <= 1150 ? controls.maxDistance = mobileMaxZoom : controls.maxDistance = desktopMaxZoom;
+    currentState = "mobile" ? controls.maxDistance = mobileMaxZoom : controls.maxDistance = desktopMaxZoom;
     controls.enablePan = false;
 
     raycaster = new THREE.Raycaster();

@@ -1,13 +1,17 @@
 var isSettingsOpen;
 if (window.innerWidth > 1150)
 {
+    currentState = "desktop"; previousState = "desktop";
     isSettingsOpen = true;
+    settingsOpenBeforeMobile = true;
     document.getElementsByClassName("settings-overlay")[0].classList.add("active");
     document.getElementsByClassName("three-scene")[0].style.width = "calc(100vw - 500px)";
 }
 else
 {
+    currentState = "mobile"; previousState = "mobile";
     isSettingsOpen = false;
+    settingsOpenBeforeMobile = false;
     document.getElementsByClassName("three-scene")[0].style.width = "100vw";
 }
 
@@ -88,8 +92,8 @@ function closeSettingsIfMobile()
         toggleSettings();
 }
 
-var settingsOpenBeforeMobile = true;
-var currentState = "desktop", previousState = "desktop";
+var settingsOpenBeforeMobile;
+var currentState, previousState;
 window.addEventListener("resize", onWindowResize, false);
 function onWindowResize()
 {

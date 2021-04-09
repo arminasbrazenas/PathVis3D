@@ -10,6 +10,10 @@
     user-select: none;
 }
 
+html {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 .mobile, .close.settings {
     display: none;
 }
@@ -245,6 +249,7 @@ button {
     width: 500px;
     background-color: #232323;
     z-index: 99;
+    overflow: hidden;
 }
 
 .settings-overlay.active {
@@ -395,6 +400,8 @@ div[class^="arrow"] {
     width: 200px;
     outline: none;
     transition: opacity 0.3s;
+    position: absolute;
+    right: 30px;
 }
 
 .slider::-webkit-slider-runnable-track {
@@ -435,11 +442,6 @@ div[class^="arrow"] {
 
 .search-speed-container, .generation-speed-container, .board-height-container, .board-width-container {
     align-items: center;
-}
-
-.slider {
-    position: absolute;
-    right: 30px;
 }
 
 .board-height-container > .type, .board-width-container > .type {
@@ -576,5 +578,84 @@ div[class^="arrow"] {
         height: 2px;
         background-color: #d1d1d1;
         margin: 10px 0;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .settings-overlay {
+        overflow: scroll;
+    }
+
+    .search-container, .maze-container, .search-type-container, .board-height-container, .board-width-container, 
+    .search-speed-container, .generation-speed-container {
+        width: 80vw;
+        flex-flow: column;
+    }
+
+    .board-height-container, .board-width-container, .search-speed-container, .generation-speed-container {
+        flex-flow: column-reverse;
+    }
+
+    .search-algorithm-container, .maze-algorithm-container, .search-way-container {
+        margin: 0;
+        align-self: center;
+        margin: 15px 0;
+    }
+
+    .type {
+        width: 100%;
+        text-align: center;
+        font-weight: 400;
+    }
+
+    .maze-container {
+        top: 150px;
+    }
+
+    .search-type-container {
+        top: 230px;
+    }
+
+    .search-speed-container {
+        top: 310px;
+    }
+
+    .generation-speed-container {
+        top: 390px;
+    }
+
+    .board-height-container {
+        top: 470px;
+    }
+
+    .board-width-container {
+        top: 550px;
+    }
+
+    .slider {
+        margin: -20px 0;
+        right: auto;
+    }
+
+    .height-value, .width-value {
+        display: none;
+    }
+
+    .com {
+        top: 630px;
+    }
+
+    .commands-container {
+        top: 665px;
+    }
+
+    .commands-container div{
+        width: 100%;
+        height: 50px;
+    }
+
+    .commands-container div button {
+        transform: translateY(50%);
+        top: 50%;
     }
 }
