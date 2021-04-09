@@ -21,7 +21,6 @@ function Mouse()
 
     this.onDown = (event) => {
         this.findIntersects(event);
-
         this.isDown = true;
         this.isDownOnGrid = false;
         if (event.button == 1) this.isMiddleDown = true;
@@ -85,7 +84,7 @@ function Mouse()
 
     this.initProperties();
 
-    document.addEventListener("mousemove", this.onMove, false);
-    document.addEventListener("mousedown", this.onDown, false);
-    document.addEventListener("mouseup", this.initProperties, false);
+    document.addEventListener("pointermove", this.onMove, false);
+    document.addEventListener("pointerdown", this.onDown, false);
+    document.addEventListener("pointerup", this.initProperties, false);
 }

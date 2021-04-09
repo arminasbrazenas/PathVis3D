@@ -1,4 +1,16 @@
-var isSettingsOpen = true;
+var isSettingsOpen;
+if (window.innerWidth > 1150)
+{
+    isSettingsOpen = true;
+    document.getElementsByClassName("settings-overlay")[0].classList.add("active");
+    document.getElementsByClassName("three-scene")[0].style.width = "calc(100vw - 500px)";
+}
+else
+{
+    isSettingsOpen = false;
+    document.getElementsByClassName("three-scene")[0].style.width = "100vw";
+}
+
 function toggleSettings()
 {
     isSettingsOpen = !isSettingsOpen;
@@ -70,6 +82,14 @@ for (var i = 0; i < document.getElementsByClassName("search-ways").length; i++)
     }, false);
 }
 
+function closeSettingsIfMobile()
+{
+    if (currentState == "mobile")
+        toggleSettings();
+}
+
+var settingsOpenBeforeMobile = true;
+var currentState = "desktop", previousState = "desktop";
 window.addEventListener("resize", onWindowResize, false);
 function onWindowResize()
 {
@@ -77,11 +97,29 @@ function onWindowResize()
     {
         renderer.setSize(window.innerWidth, window.innerHeight);
         camera.aspect = window.innerWidth / window.innerHeight;
+
+        if (currentState == "desktop") settingsOpenBeforeMobile = false;
     }
     else
     {
         renderer.setSize(window.innerWidth - 500, window.innerHeight);
         camera.aspect = (window.innerWidth - 500) / window.innerHeight;  
+
+        if (currentState == "desktop") settingsOpenBeforeMobile = true;
     }
     camera.updateProjectionMatrix();
+
+    previousState = currentState;
+    window.innerWidth <= 1150 ? currentState = "mobile" : currentState = "desktop";
+    
+    if (currentState == "mobile" && previousState == "desktop" && isSettingsOpen == true)
+    {
+        toggleSettings();
+        controls.maxDistance = mobileMaxZoom;
+    }
+    else if (currentState == "desktop" && previousState == "mobile" && settingsOpenBeforeMobile == true && isSettingsOpen == false)
+    {
+        toggleSettings();
+        controls.maxDistance = desktopMaxZoom;
+    }
 }

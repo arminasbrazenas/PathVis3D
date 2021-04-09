@@ -611,7 +611,6 @@ THREE.OrbitControls = function ( object, domElement ) {
 	}
 
 	function handleTouchStartRotate( event ) {
-
 		if ( event.touches.length == 1 ) {
 
 			rotateStart.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
@@ -814,7 +813,6 @@ THREE.OrbitControls = function ( object, domElement ) {
 	}
 
 	function onMouseDown( event ) {
-
 		// Prevent the browser from scrolling.
 		//event.preventDefault();
 
@@ -1004,7 +1002,6 @@ THREE.OrbitControls = function ( object, domElement ) {
 		switch ( event.touches.length ) {
 
 			case 1:
-
 				switch ( scope.touches.ONE ) {
 
 					case THREE.TOUCH.ROTATE:
