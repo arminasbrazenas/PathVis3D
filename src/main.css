@@ -10,6 +10,10 @@
     user-select: none;
 }
 
+.mobile, .close.settings {
+    display: none;
+}
+
 a {
     text-decoration: none;
     color: #d1d1d1;
@@ -31,13 +35,12 @@ a {
 }
 
 .github-logo:hover {
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
 .three-scene {
     position: absolute;
     height: 0;
-    width: calc(100vw - 500px);
 }
 
 .three-scene.active {
@@ -99,7 +102,7 @@ p {
 }
 
 .hyperlink-word:hover {
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
 .previous-btn, .next-btn {
@@ -111,7 +114,7 @@ p {
 }
 
 .previous-btn:hover, .next-btn:hover {
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
 .previous-btn {
@@ -146,6 +149,7 @@ p {
     opacity: 1;
     right: 10px;
     top: 10px;
+    transition: opacity 0.3s;
 }
 
 .close:hover {
@@ -185,7 +189,7 @@ body {
 .logo {
     position: absolute;
     left: 40px;
-    top: 20px;
+    top: 25px;
     margin-right: 50px;
     font-size: 18px;
     font-weight: 500;
@@ -201,7 +205,7 @@ button {
 
 .main-btn {
     position: absolute;
-    top: 23px;
+    top: 26px;
     cursor: pointer;
     font-size: 16px;  
     font-weight: 400;
@@ -272,7 +276,7 @@ button {
     height: 100px;
 }
 
-.commands-container > button {
+.commands-container > div {
     width: 50%;
     text-align: center;
     align-self: flex-start;
@@ -520,5 +524,57 @@ div[class^="arrow"] {
         -webkit-transform: rotate(360deg);
         -ms-transform: rotate(360deg);
         transform: rotate(360deg);
+    }
+}
+
+@media only screen and (max-width: 1150px) {
+    .close.settings {
+        display: block;
+    }
+
+    .settings-overlay {
+        width: 100vw;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 70px;
+        width: 100vw;
+    }
+
+    .path-btn, .logo {
+        position: static;
+        margin: 0;
+    }
+
+    .logo {
+        margin-left: 7%;
+    }
+
+    .hamburger-wrap {
+        margin-right: 7%;
+        cursor: pointer;
+        transition: opacity 0.3s;
+    }
+
+    .hamburger-wrap:hover {
+        opacity: 0.7;
+    }
+
+    .main-btn {
+        transform: translateX(0);
+    }
+
+    .hamburger-menu {
+        width: 40px;
+        height: 2px;
+        background-color: #d1d1d1;
+        margin: 10px 0;
     }
 }

@@ -81,8 +81,11 @@ function toggleRunning(state, type)
     {
         if (type == "path")
         {
-            document.getElementsByClassName("path-btn")[0].innerHTML = "Searching..."
-            document.getElementsByClassName("path-btn")[0].style.color = "#36aeeb";
+            for (var i = 0; i < document.getElementsByClassName("path-btn").length; i++)
+            {
+                document.getElementsByClassName("path-btn")[i].innerHTML = "Searching..."
+                document.getElementsByClassName("path-btn")[i].style.color = "#36aeeb";
+            }
         }
         else if (type == "maze")
         {
@@ -100,8 +103,11 @@ function toggleRunning(state, type)
     {
         if (type == "path")
         {
-            document.getElementsByClassName("path-btn")[0].innerHTML = "Find Path";
-            document.getElementsByClassName("path-btn")[0].style.color = "";
+            for (var i = 0; i < document.getElementsByClassName("path-btn").length; i++)
+            {
+            document.getElementsByClassName("path-btn")[i].innerHTML = "Find Path";
+            document.getElementsByClassName("path-btn")[i].style.color = "";
+            }
         }
         else if (type == "maze")
         {

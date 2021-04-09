@@ -15,13 +15,26 @@
 
         <div id="loaded">
             <div class="three-scene">
-                <div class="logo">PathVis3d</div>
-                <button class="main-btn settings-btn" onclick="toggleSettings();">Settings</button>
-                <button class="main-btn path-btn" onclick="findPath();">Find Path</button>
-                <button class="main-btn help-btn" onclick="toggleTutorial();">Tutorial</button>
+                <div class="desktop">
+                    <div class="logo">PathVis3d</div>
+                    <button class="main-btn settings-btn" onclick="toggleSettings();">Settings</button>
+                    <button class="main-btn path-btn" onclick="findPath();">Find Path</button>
+                    <button class="main-btn help-btn" onclick="toggleTutorial();">Tutorial</button>
+                </div>
+
+                <div class="mobile">
+                    <div class="logo">PathVis3d</div>
+                    <button class="main-btn path-btn" onclick="findPath();">Find Path</button>
+                    <div class="hamburger-wrap" onclick="toggleSettings();">
+                        <div class="hamburger-menu"></div>
+                        <div class="hamburger-menu"></div>
+                        <div class="hamburger-menu"></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="settings-overlay active">
+            <div class="settings-overlay">
+                <button onclick="toggleSettings();" class="close settings"></button>
                 <h1 class="stg">Settings</h1>
                 <div class="search-container">
                     <div class="type">Pathfinding: </div>
@@ -81,23 +94,23 @@
     
                 <h1 class="com">Commands</h1>
                 <div class="commands-container">
-                    <button class="command generate-maze-btn" onclick="generateMaze();">Generate Maze</button>
-                    <button class="command" onclick="grid.clear();">Clear Board</button>
-                    <button class="command" onclick="grid.reset();">Reset Board</button>
-                    <button class="command" onclick="clearPath();">Clear Path</button>
+                    <div><button class="command generate-maze-btn" onclick="generateMaze(); closeSettingsIfMobile();">Generate Maze</button></div>
+                    <div><button class="command" onclick="grid.clear(); closeSettingsIfMobile();">Clear Board</button></div>
+                    <div><button class="command" onclick="grid.reset(); closeSettingsIfMobile();">Reset Board</button></div>
+                    <div><button class="command" onclick="clearPath(); closeSettingsIfMobile();">Clear Path</button></div>
                 </div>
             </div>
 
             <div class="tutorial-container">
                 <button onclick="toggleTutorial();" class="close"></button>
-                <a href="https://github.com/arminasbrazenas"><img class="github-logo" src="./src/images/github.png"></a>
+                <a href="https://github.com/arminasbrazenas/PathVis3d"><img class="github-logo" src="./src/images/github.png"></a>
                 <button class="previous-btn" onclick="switchTutorialBackwards();">Previous</button>
                 <button class="next-btn" onclick="switchTutorialForwards();">Next</button>
 
                 <div class="tutorial-pages current-page">
                     <h1>What is PathVis3d?</h1>
                     <p><span class="bold">PathVis3d</span> is a project created to visualize pathfinding and maze generation algorithms in 3D.</p>
-                    <p>If you want to know more about it, check it out on GitHub by clicking <a style="font-size: 18px;" class="hyperlink-word" href="https://github.com/arminasbrazenas"><i>here</i></a> or on the icon in the bottom left.</p>
+                    <p>If you want to know more about it, check it out on GitHub by clicking <a style="font-size: 18px;" class="hyperlink-word" href="https://github.com/arminasbrazenas/PathVis3d"><i>here</i></a> or on the icon in the bottom left.</p>
                     <img class="logo-img" src="./src/images/favicon.png">
                 </div>
 
