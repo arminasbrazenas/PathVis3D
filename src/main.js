@@ -82,11 +82,8 @@ function Init()
     initializeObjects();
     setLightAndCameraPositions();
 
-    document.getElementById("preloader").classList.add("hidden");
+    document.getElementsByClassName("loader")[0].remove();
     document.getElementById("loaded").style.display = "block";
-    setTimeout(() => {
-        document.getElementById("preloader").remove();
-    }, 500);
 }
 
 function Animate()
