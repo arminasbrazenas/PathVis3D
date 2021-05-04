@@ -1,10 +1,10 @@
 var isSettingsOpen;
-if (window.innerWidth > 1150)
+if (window.innerWidth > 1000)
 {
     currentState = "desktop"; previousState = "desktop";
     isSettingsOpen = true;
     settingsOpenBeforeMobile = true;
-    document.getElementsByClassName("settings-overlay")[0].classList.add("active");
+    document.getElementsByClassName("settings")[0].classList.add("active");
     document.getElementsByClassName("three-scene")[0].style.width = "calc(100vw - 500px)";
 }
 else
@@ -17,79 +17,34 @@ else
 
 function toggleSettings()
 {
-    isSettingsOpen = !isSettingsOpen;
-    document.getElementsByClassName("settings-overlay")[0].classList.toggle("active");
+    if (isTutorialOpen == false)
+        document.getElementsByClassName("settings")[0].classList.contains("active") ? closeSettings() : openSettings();
+}
+
+function closeSettings()
+{
+    isSettingsOpen = false;
+    document.getElementsByClassName("settings")[0].classList.remove("active");
     onWindowResize(isSettingsOpen);
 
-    var blur = document.getElementsByClassName("three-scene")[0];
-    isSettingsOpen == true ? blur.style.width = "calc(100vw - 500px)" : blur.style.width = "100vw";
+    document.getElementsByClassName("three-scene")[0].style.width = "calc(100vw)";   
 }
 
-function switchPickBackwards(className, currentOption)
+function openSettings()
 {
-    if (isRunning == false)
-    {
-        var length = document.getElementsByClassName(className).length;
-        for (var i = 0; i < length; i++)
-        {
-            if (document.getElementsByClassName(className)[i] == document.getElementsByClassName(currentOption)[0])
-            {
-                document.getElementsByClassName(currentOption)[0].classList.remove(currentOption);
-                if (i > 0)
-                    document.getElementsByClassName(className)[i - 1].classList.add(currentOption);
-                else
-                    document.getElementsByClassName(className)[length - 1].classList.add(currentOption);
-                return;
-            }
-        }
-    }
+    isSettingsOpen = true;
+    document.getElementsByClassName("settings")[0].classList.add("active");
+    onWindowResize(isSettingsOpen);
+
+    document.getElementsByClassName("three-scene")[0].style.width = "calc(100vw - 500px)";   
 }
 
-function switchPickForwards(className, currentOption)
+for (var i = 0; i < document.getElementsByClassName("btn-wrap").length; i++)
 {
-    if (isRunning == false)
-    {
-        var length = document.getElementsByClassName(className).length;
-        for (var i = 0; i < length; i++)
-        {
-            if (document.getElementsByClassName(className)[i] == document.getElementsByClassName(currentOption)[0])
-            {
-                document.getElementsByClassName(currentOption)[0].classList.remove(currentOption);
-                if (i == length - 1)
-                    document.getElementsByClassName(className)[0].classList.add(currentOption);
-                else
-                    document.getElementsByClassName(className)[i + 1].classList.add(currentOption);
-                return;          
-            }
-        }
-    }
-}
-
-for (var i = 0; i < document.getElementsByClassName("search-algorithms").length; i++)
-{
-    document.getElementsByClassName("search-algorithms")[i].addEventListener("click", function() {
-        switchPickForwards(`search-algorithms`, `current-search`);
-    }, false);
-}
-
-for (var i = 0; i < document.getElementsByClassName("maze-algorithms").length; i++)
-{
-    document.getElementsByClassName("maze-algorithms")[i].addEventListener("click", function() {
-        switchPickForwards(`maze-algorithms`, `current-maze`);
-    }, false);
-}
-
-for (var i = 0; i < document.getElementsByClassName("search-ways").length; i++)
-{
-    document.getElementsByClassName("search-ways")[i].addEventListener("click", function() {
-        switchPickForwards(`search-ways`, `current-search-way`);
-    }, false);
-}
-
-function closeSettingsIfMobile()
-{
-    if (currentState == "mobile")
-        toggleSettings();
+    document.getElementsByClassName("btn-wrap")[i].addEventListener("click", () => {
+        if (currentState == "mobile")
+            closeSettings();
+    })
 }
 
 var settingsOpenBeforeMobile;
@@ -114,16 +69,76 @@ function onWindowResize()
     camera.updateProjectionMatrix();
 
     previousState = currentState;
-    window.innerWidth <= 1150 ? currentState = "mobile" : currentState = "desktop";
+    window.innerWidth <= 1000 ? currentState = "mobile" : currentState = "desktop";
     
     if (currentState == "mobile" && previousState == "desktop" && isSettingsOpen == true)
     {
-        toggleSettings();
+        closeSettings();
         controls.maxDistance = mobileMaxZoom;
     }
     else if (currentState == "desktop" && previousState == "mobile" && settingsOpenBeforeMobile == true && isSettingsOpen == false)
     {
-        toggleSettings();
+        openSettings();
         controls.maxDistance = desktopMaxZoom;
     }
 }
+
+function openSettingsTypeOptions(index)
+{
+    document.getElementsByClassName("settings-type-wrapper")[index].classList.toggle("active");
+    document.getElementsByClassName("type-wrapper-options")[index].classList.toggle("active");
+}
+
+function switchSelectorForwards(className)
+{
+    if (isRunning == false)
+    {
+        var length = document.getElementsByClassName(className).length;
+        for (var i = 0; i < length; i++)
+        {
+            if (document.getElementsByClassName(className)[i].classList.contains("current"))
+            {
+                document.getElementsByClassName(className)[i].classList.remove("current");
+                if (i == length - 1) 
+                    document.getElementsByClassName(className)[0].classList.add("current");
+                else
+                    document.getElementsByClassName(className)[i + 1].classList.add("current");
+                return;
+            }
+        }
+    }
+}
+
+function switchSelectorBackwards(className)
+{
+    if (isRunning == false)
+    {
+        var length = document.getElementsByClassName(className).length;
+        for (var i = 0; i < length; i++)
+        {
+            if (document.getElementsByClassName(className)[i].classList.contains("current"))
+            {
+                document.getElementsByClassName(className)[i].classList.remove("current");
+                if (i > 0)
+                    document.getElementsByClassName(className)[i - 1].classList.add("current");
+                else
+                    document.getElementsByClassName(className)[length - 1].classList.add("current");
+                return;
+            }
+        }
+    }
+}
+
+function addSelectorSwitchForClass(className)
+{
+    for (var i = 0; i < document.getElementsByClassName(className).length; i++)
+    {
+        document.getElementsByClassName(className)[i].addEventListener("click", function() {
+            switchSelectorForwards(className);
+        }, false);
+    }
+}
+
+addSelectorSwitchForClass("pathfinding-algorithms");
+addSelectorSwitchForClass("pathfinding-type");
+addSelectorSwitchForClass("maze-algorithms");

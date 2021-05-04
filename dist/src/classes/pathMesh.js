@@ -30,6 +30,11 @@ function Path () {
         this.all = [];
     }
 
+    this.clear = () => {
+        searchMesh.init();
+        pathMesh.init();
+    }
+
     this.geometry = searchMesh.geometry;
     this.material = searchMesh.material;
 

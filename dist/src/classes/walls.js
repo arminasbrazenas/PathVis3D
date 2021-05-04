@@ -1,7 +1,7 @@
 function Walls()
 {
     this.add = (intersectObject) => {
-        clearPath();
+        pathMesh.clear();
         let wallMesh = new THREE.Mesh(this.geometry);
         wallMesh.position.set(intersectObject.position.x, CUBE_LENGTH / 2, intersectObject.position.z);
         wallMesh.name = `${intersectObject.id} wall`;
@@ -18,8 +18,10 @@ function Walls()
 
         scene.add(dummyMesh);
 
-        TweenMax.fromTo(dummyMesh.scale, {y: 0, z: 0, x: 0}, {duration: 0.3, y: 1.05, z: 1.05, x: 1.05});
-        TweenMax.to(dummyMesh.scale, {duration: 0.3, y: 1, z: 1, x: 1, delay: 0.3});
+        TweenMax.fromTo(dummyMesh.scale, {y: 0}, {duration: this.animationSpeed, y: 1.25});
+        TweenMax.fromTo(dummyMesh.position, {y: 0}, {duration: this.animationSpeed, y: CUBE_LENGTH / 2 + CUBE_LENGTH / 8});
+        TweenMax.to(dummyMesh.scale, {duration: this.animationSpeed, y: 1, z: 1, x: 1, delay: this.animationSpeed});
+        TweenMax.to(dummyMesh.position, {duration: this.animationSpeed, y: CUBE_LENGTH / 2, delay: this.animationSpeed});
         setTimeout(() => {
             if (dummyMesh.parent != null)
             {
@@ -28,7 +30,7 @@ function Walls()
                 this.walls.geometry.mergeMesh(wallMesh);
                 this.addToScene();
             }
-        }, 600)
+        }, this.animationSpeed * 2000)
     }
 
     this.addNoAnimation = (intersectObject) => {
@@ -61,13 +63,16 @@ function Walls()
         this.nonmerge.push(wallMesh);
         scene.add(wallMesh);
 
-        TweenMax.from(wallMesh.scale, {duration: 0.5, x: 0, y: 0, z: 0});
+        TweenMax.fromTo(wallMesh.scale, {y: 0}, {duration: this.animationSpeed, y: 1.25});
+        TweenMax.fromTo(wallMesh.position, {y: 0}, {duration: this.animationSpeed, y: CUBE_LENGTH / 2 + CUBE_LENGTH / 8});
+        TweenMax.to(wallMesh.scale, {duration: this.animationSpeed, y: 1, z: 1, x: 1, delay: this.animationSpeed});
+        TweenMax.to(wallMesh.position, {duration: this.animationSpeed, y: CUBE_LENGTH / 2, delay: this.animationSpeed});
 
         return this.nonmerge.length - 1;
     }
 
     this.remove = (intersectObject) => {
-        clearPath();
+        pathMesh.clear();
         scene.remove(scene.getObjectByName(intersectObject.id));
         
         wallGeometries.splice(wallGeometries.indexOf(intersectObject), 1);
@@ -129,6 +134,7 @@ function Walls()
             this.walls = undefined;
         }
 
+        this.animationSpeed = 0.4;
         this.walls = new THREE.Mesh(new THREE.Geometry(), this.material);
         this.walls.castShadow = true;
         this.walls.receiveShadow = true;  

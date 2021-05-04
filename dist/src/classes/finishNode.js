@@ -11,7 +11,7 @@ function FinishNode()
     this.changePosition = (intersectObject) => {
         if (isTutorialOpen == false)
         {
-            clearPath();
+            pathMesh.clear();
             if (this.lastNode != undefined)
                 walls.addNoAnimation(this.lastNode);
     
