@@ -57,7 +57,7 @@ function Grid()
     }
 
     this.clear = () => {
-        clearPath();
+        pathMesh.clear();
         walls.removeAll();  
     }
 
@@ -71,19 +71,19 @@ function Grid()
 
     const HEIGHT_SLIDER = document.getElementById("height-slider");
     this.maxHeight = parseInt(HEIGHT_SLIDER.max);
-    document.getElementsByClassName("height-value")[0].innerHTML = parseInt(HEIGHT_SLIDER.value);
+    document.querySelector(".slider-value.height").innerHTML = parseInt(HEIGHT_SLIDER.value);
     HEIGHT_SLIDER.oninput = () => {
         this.height = parseInt(HEIGHT_SLIDER.value);
-        document.getElementsByClassName("height-value")[0].innerHTML = this.height;
+        document.querySelector(".slider-value.height").innerHTML = this.height;
         this.onResize();
     }
 
     const WIDTH_SLIDER = document.getElementById("width-slider")
     this.maxWidth = parseInt(WIDTH_SLIDER.max); 
-    document.getElementsByClassName("width-value")[0].innerHTML = parseInt(WIDTH_SLIDER.value);
+    document.querySelector(".slider-value.width").innerHTML = parseInt(WIDTH_SLIDER.value);
     WIDTH_SLIDER.oninput = () => {
         this.width = parseInt(WIDTH_SLIDER.value);
-        document.getElementsByClassName("width-value")[0].innerHTML = this.width;
+        document.querySelector(".slider-value.width").innerHTML = this.width;
         this.onResize();
     }
 

@@ -74,11 +74,11 @@ function Mouse()
         }
     }
 
-    document.getElementsByClassName("settings-overlay")[0].addEventListener("mousemove", () => {
+    document.getElementsByClassName("settings")[0].addEventListener("mousemove", () => {
         this.isOnSettings = true;
     });
     
-    document.getElementsByClassName("settings-overlay")[0].addEventListener("mouseleave", () => {
+    document.getElementsByClassName("settings")[0].addEventListener("mouseleave", () => {
         this.isOnSettings = false;
     });
 

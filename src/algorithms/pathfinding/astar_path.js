@@ -54,10 +54,10 @@ function aStarPath(planeIdArr)
         nodes[startIndex].hCost = calculateHCost8Directional(startIndex);
     openArr.push(nodes[startIndex]);
     
-    
     var interval = setInterval(() => {
         openArr.sort(function(a, b) {
             if ((a.gCost + a.hCost < b.gCost + b.hCost) || (a.gCost + a.hCost == b.gCost + b.hCost && a.hCost < b.hCost)) return -1;
+            else return 1;
         });
 
         if (openArr.length == 0)

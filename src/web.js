@@ -7,12 +7,12 @@ function findPath()
 {
     if (isRunning == false)
     {
-        searchDirections = parseInt(document.getElementsByClassName("current-search-way")[0].id);
+        searchDirections = parseInt(document.querySelectorAll(".pathfinding-type.current")[0].id);
         elapsedMilliseconds = 0;
-        searchSpeed = parseInt(document.getElementById("search-speed-slider").value);
+        searchSpeed = parseInt(document.getElementById("pathfinding-speed-slider").value);
         searchAnimationSpeed = 1.5 - searchSpeed / 10;
         searchSpeed <= 5 ? searchSpeed = -100 * searchSpeed + 600 : searchSpeed = -20 * searchSpeed + 200;
-        clearPath();
+        pathMesh.clear();
         toggleRunning(true, "path");
         searchObjects = [];
         
@@ -27,7 +27,7 @@ function findPath()
         
         startIndex = (start.nodeId - nodes[0].id) - (grid.maxWidth - grid.width) * parseInt((start.nodeId - nodes[0].id) / grid.maxWidth);
         finishIndex = (finish.nodeId - nodes[0].id) - (grid.maxWidth - grid.width) * parseInt((finish.nodeId - nodes[0].id) / grid.maxWidth);
-        switch(document.getElementsByClassName("current-search")[0].id)
+        switch(document.querySelector(".pathfinding-algorithms.current").id)
         {
             case "a-star-path":
                 aStarPath(planeIdArr);
@@ -52,12 +52,12 @@ function generateMaze()
     {
         elapsedMilliseconds = 0;
         wallAdditionSpeed = parseInt(1000 / (grid.height * grid.width));
-        mazeGenerationSpeed = parseInt(document.getElementById("generation-speed-slider").value);
+        mazeGenerationSpeed = parseInt(document.getElementById("maze-speed-slider").value);
         mazeGenerationSpeed <= 5 ? mazeGenerationSpeed = -100 * mazeGenerationSpeed + 600 : mazeGenerationSpeed = -20 * mazeGenerationSpeed + 200;
         mazeGenerationSpeed < 2 ? mazeGenerationSpeed = 2 : mazeGenerationSpeed = mazeGenerationSpeed;
         grid.reset();
         toggleRunning(true, "maze");
-        switch(document.getElementsByClassName("current-maze")[0].id)
+        switch(document.querySelectorAll(".maze-algorithms.current")[0].id)
         {
             case "dfs-maze":
                 depthFirstSearchMaze();
@@ -77,22 +77,13 @@ function generateMaze()
 
 function toggleRunning(state, type)
 {
+    var className;
     if (state == true)
     {
-        if (type == "path")
-        {
-            for (var i = 0; i < document.getElementsByClassName("path-btn").length; i++)
-            {
-                document.getElementsByClassName("path-btn")[i].innerHTML = "Searching..."
-                document.getElementsByClassName("path-btn")[i].style.color = "#36aeeb";
-            }
-        }
-        else if (type == "maze")
-        {
-            document.getElementsByClassName("generate-maze-btn")[0].innerHTML = "Generating Maze..."
-            document.getElementsByClassName("generate-maze-btn")[0].style.color = "#D5A353";
-        }
-
+        type == "path" ? className = "visualize-pathfinding" : className = "visualize-maze";
+        document.querySelector(`.${className}-btn`).classList.add("active");
+        document.querySelector(`.${className}-btn`).querySelector(".main-btn").innerHTML = "Visualizing";
+        
         isRunning = true;
         for (var i = 0; i < document.getElementsByClassName("command").length; i++)
             document.getElementsByClassName("command")[i].disabled = true;
@@ -101,19 +92,10 @@ function toggleRunning(state, type)
     }
     else
     {
-        if (type == "path")
-        {
-            for (var i = 0; i < document.getElementsByClassName("path-btn").length; i++)
-            {
-            document.getElementsByClassName("path-btn")[i].innerHTML = "Find Path";
-            document.getElementsByClassName("path-btn")[i].style.color = "";
-            }
-        }
-        else if (type == "maze")
-        {
-            document.getElementsByClassName("generate-maze-btn")[0].innerHTML = "Generate Maze";
-            document.getElementsByClassName("generate-maze-btn")[0].style.color = "";
-        }
+        type == "path" ? className = "visualize-pathfinding" : className = "visualize-maze";
+        document.querySelector(`.${className}-btn`).classList.remove("active");
+        document.querySelector(`.${className}-btn`).querySelector(".main-btn").innerHTML = "Visualize";
+
 
         isRunning = false;
         for (var i = 0; i < document.getElementsByClassName("command").length; i++)
@@ -121,10 +103,4 @@ function toggleRunning(state, type)
         for (var i = 0; i < document.getElementsByClassName("slider").length; i++)
             document.getElementsByClassName("slider")[i].disabled = false;
     }
-}
-
-function clearPath()
-{
-    searchMesh.init();
-    pathMesh.init();
 }

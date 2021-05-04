@@ -1,5 +1,42 @@
 var isTutorialOpen = false;
 var settingsOpenBeforeTutorial = false;
+
+function toggleTutorial()
+{
+    isTutorialOpen = !isTutorialOpen;
+    if (isTutorialOpen == true)
+    {
+        //toggleMainButtons(true);
+        isSettingsOpen == true ? settingsOpenBeforeTutorial = true : settingsOpenBeforeTutorial = false;
+    }
+    else
+    {
+        //toggleMainButtons(false);
+        if (settingsOpenBeforeTutorial == true) toggleSettings();
+    }
+
+    if (isTutorialOpen == true)
+    {
+        isSettingsOpen = false;
+        document.getElementsByClassName("settings")[0].classList.remove("active");
+        document.getElementsByClassName("three-scene")[0].style.width = "100vw";
+        onWindowResize(isSettingsOpen);
+    }
+    document.getElementsByClassName("three-scene")[0].classList.toggle("active");
+    document.getElementsByClassName("tutorial-wrap")[0].classList.toggle("active");
+}
+
+/*function toggleMainButtons(state)
+{
+    for (var i = 0; i < document.getElementsByClassName("main-btn").length; i++)
+    {
+        var button = document.getElementsByClassName("main-btn")[i];
+        button.disabled = state;
+        button.classList.toggle("no-effects");
+    }
+}*/
+
+/*var settingsOpenBeforeTutorial = false;
 function toggleTutorial()
 {
     isTutorialOpen = !isTutorialOpen;
@@ -81,4 +118,4 @@ function toggleMainButtons(state)
         button.disabled = state;
         button.classList.toggle("no-effects");
     }
-}
+}*/
