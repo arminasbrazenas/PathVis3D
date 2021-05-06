@@ -76,7 +76,7 @@ function onWindowResize()
         closeSettings();
         controls.maxDistance = mobileMaxZoom;
     }
-    else if (currentState == "desktop" && previousState == "mobile" && settingsOpenBeforeMobile == true && isSettingsOpen == false)
+    else if (currentState == "desktop" && previousState == "mobile" && settingsOpenBeforeMobile == true && isSettingsOpen == false && isTutorialOpen == false)
     {
         openSettings();
         controls.maxDistance = desktopMaxZoom;

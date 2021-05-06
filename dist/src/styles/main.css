@@ -25,6 +25,7 @@ body {
   width: 60%;
   display: none;
   position: absolute;
+  overflow: hidden;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -36,29 +37,31 @@ body {
 .tutorial-wrap .buttons {
   position: absolute;
   bottom: 30px;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 42px;
   -ms-grid-column-align: center;
       justify-self: center;
+  right: 0;
+  -webkit-box-pack: end !important;
+      -ms-flex-pack: end !important;
+          justify-content: flex-end !important;
 }
 
 .tutorial-wrap .buttons .btn-wrap {
-  right: 0 !important;
-  position: static;
+  position: relative;
+  bottom: auto !important;
+  left: auto !important;
+  right: 42px !important;
+  margin: 0 15px;
 }
 
-.tutorial-wrap .github-logo {
-  position: absolute;
-  left: 50px;
-  bottom: 30px;
-  width: 30px;
-  opacity: 0.6;
-  -webkit-transition: 0.3s ease-in-out;
-  transition: 0.3s ease-in-out;
+.tutorial-wrap .buttons .btn-wrap:first-child .main-btn {
+  border-radius: 0 5px 5px 0;
+  border-width: 2px 2px 2px 0px;
 }
 
-.tutorial-wrap .github-logo:hover {
-  opacity: 1;
+.tutorial-wrap .buttons .btn-wrap:first-child .after-btn {
+  border-radius: 5px 0 0 5px;
 }
 
 .tutorial-wrap.active {
@@ -68,58 +71,70 @@ body {
   text-align: left;
 }
 
-.tutorial-page {
+.tutorial-pages {
   width: 100%;
   height: 100%;
+  display: none;
+}
+
+.tutorial-pages.current {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.tutorial-page .text {
+.tutorial-pages .text {
   height: 100%;
-  width: 33%;
+  width: 35%;
   padding: 50px;
+  padding-top: 30px;
 }
 
-.tutorial-page .showcase {
+.tutorial-pages .showcase {
   height: 100%;
-  width: 67%;
+  width: 65%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
-.tutorial-page .bold {
+.tutorial-pages .bold {
   font-weight: 600;
+  text-decoration: none;
 }
 
-.tutorial-page h2 {
+.tutorial-pages h2 {
   font-size: 22px;
   -webkit-user-select: auto !important;
      -moz-user-select: auto !important;
       -ms-user-select: auto !important;
           user-select: auto !important;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
-.tutorial-page p {
+.tutorial-pages h2:not(:first-child) {
+  margin-top: 40px;
+}
+
+.tutorial-pages p {
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
-.tutorial-page .logo-img {
-  width: 350px;
-  height: 350px;
-  position: absolute;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  top: 50%;
+.tutorial-pages img {
+  width: 90%;
+  height: 18vw;
+  position: relative;
+  right: 56px;
+  top: 74px;
+}
+
+.tutorial-pages .logo-img {
+  width: 20vw;
+  height: 20vw;
 }
 
 .three-scene {
@@ -164,6 +179,11 @@ body {
 
 .three-scene .hamburger-wrap:hover {
   opacity: 1;
+}
+
+.three-scene .hamburger-wrap.no-effects {
+  opacity: 0.3;
+  cursor: auto;
 }
 
 .three-scene .hamburger-wrap div {
@@ -689,13 +709,76 @@ body {
       align-self: center;
 }
 
+@media only screen and (max-width: 1500px) {
+  .tutorial-wrap {
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .tutorial-wrap .text {
+    width: 70%;
+    height: auto;
+    text-align: center;
+    padding-bottom: 0;
+  }
+  .tutorial-wrap .tutorial-pages {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: auto;
+  }
+  .tutorial-wrap .showcase {
+    position: relative;
+    height: auto;
+    width: 80vw;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin: 50px 0;
+  }
+  .tutorial-wrap img {
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    height: 40vw;
+  }
+  .tutorial-wrap .logo-img {
+    width: 50vw;
+    height: 50vw;
+    max-height: 400px;
+    max-width: 400px;
+  }
+  .tutorial-wrap .buttons {
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+    margin-top: auto;
+    margin-bottom: 50px;
+    position: relative;
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
+    height: 150px;
+    top: 20px;
+  }
+  .tutorial-wrap .buttons .btn-wrap {
+    right: auto !important;
+    left: auto !important;
+  }
+}
+
 @media only screen and (max-width: 1000px) {
   .settings {
     width: 100%;
-  }
-  .tutorial-wrap {
-    width: 80% !important;
-    height: 80% !important;
   }
   .property-wrapper, .buttons {
     -webkit-box-pack: start !important;
@@ -720,10 +803,6 @@ body {
 }
 
 @media only screen and (max-width: 500px) {
-  .tutorial-wrap {
-    width: 100% !important;
-    height: 100% !important;
-  }
   .settings h2, .three-scene h1 {
     font-size: 20px;
   }
@@ -776,6 +855,14 @@ body {
   .buttons .main-btn {
     width: calc(84% - 42px) !important;
     font-size: 16px !important;
+  }
+  .tutorial-wrap .buttons {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .tutorial-wrap .main-btn {
+    width: calc(70vw - 42px) !important;
   }
   .property-wrapper {
     -webkit-box-orient: vertical !important;
