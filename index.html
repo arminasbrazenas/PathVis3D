@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -55,7 +55,7 @@
                 </div>
     
                 <div class="settings-type-wrapper" onclick="openSettingsTypeOptions(0);">
-                    <img class="icon" src="./src/styles/svg/pathfinding_icon.svg">
+                    <img class="icon" src="./src/styles/svg/pathfinding_icon.svg" alt="">
                     <h3>Pathfinding</h3>
                     <div class="arrow dropdown"></div>
                 </div>
@@ -94,18 +94,18 @@
                     <div class="buttons">
                         <div class="visualize-pathfinding-btn btn-wrap" onclick="findPath();">
                             <div class="main-btn">Visualize</div>
-                            <div class="after-btn"><img src="./src/styles/svg/pathfinding_visualize_icon.svg"></div>
+                            <div class="after-btn"><img src="./src/styles/svg/pathfinding_visualize_icon.svg" alt=""></div>
                         </div>
     
                         <div class="btn-wrap" onclick="pathMesh.clear();">
                             <div class="main-btn">Clear</div>
-                            <div class="after-btn"><img src="./src/styles/svg/clear_icon.svg"></div>
+                            <div class="after-btn"><img src="./src/styles/svg/clear_icon.svg" alt=""></div>
                         </div>
                     </div>
                 </div>
     
                 <div class="settings-type-wrapper" onclick="openSettingsTypeOptions(1);">
-                    <img class="icon" src="./src/styles/svg/maze_icon.svg">
+                    <img class="icon" src="./src/styles/svg/maze_icon.svg" alt="">
                     <h3>Maze Generation</h3>
                     <div class="arrow dropdown"></div>
                 </div>
@@ -132,13 +132,13 @@
                     <div class="buttons">
                         <div class="visualize-maze-btn btn-wrap" onclick="generateMaze();">
                             <div class="main-btn">Visualize</div>
-                            <div class="after-btn"><img src="./src/styles/svg/maze_visualize_icon.svg"></div>
+                            <div class="after-btn"><img src="./src/styles/svg/maze_visualize_icon.svg" alt=""></div>
                         </div>
                     </div>
                 </div>
     
                 <div class="settings-type-wrapper" onclick="openSettingsTypeOptions(2);">
-                    <img class="icon" src="./src/styles/svg/board_icon.svg">
+                    <img class="icon" src="./src/styles/svg/board_icon.svg" alt="">
                     <h3>Board</h3>
                     <div class="arrow dropdown"></div>
                 </div>
@@ -156,33 +156,33 @@
                     <div class="buttons">
                         <div class="btn-wrap" onclick="grid.reset();">
                             <div class="main-btn">Reset</div>
-                            <div class="after-btn"><img src="./src/styles/svg/reset_icon.svg"></div>
+                            <div class="after-btn"><img src="./src/styles/svg/reset_icon.svg" alt=""></div>
                         </div>
     
                         <div class="btn-wrap" onclick="grid.clear();">
                             <div class="main-btn" >Clear</div>
-                            <div class="after-btn"><img src="./src/styles/svg/clear_icon.svg"></div>
+                            <div class="after-btn"><img src="./src/styles/svg/clear_icon.svg" alt=""></div>
                         </div>
                     </div>
                 </div>
     
                 <div class="settings-type-wrapper" onclick="toggleTutorial();">
-                    <img class="icon" src="./src/styles/svg/tutorial_icon.svg">
+                    <img class="icon" src="./src/styles/svg/tutorial_icon.svg" alt="">
                     <h3>Tutorial</h3>
                 </div>
             </div>
 
             <div class="tutorial-wrap">
-                <button onclick="toggleTutorial(); pageSwitched();" class="close" style="right: 22px;"></button>
+                <div onclick="toggleTutorial();" class="close" style="right: 22px;"></div>
                 <div class="buttons">
                     <div class="btn-wrap" onclick="switchTutorialBackwards();">
-                        <div class="after-btn"><img src="./src/styles/svg/tutorial_arrow_left.svg" style="width: 30px;"></div>
+                        <div class="after-btn"><img src="./src/styles/svg/tutorial_arrow_left.svg" alt="" style="width: 30px;"></div>
                         <div class="main-btn">Previous</div>
                     </div>
 
                     <div class="btn-wrap" onclick="switchTutorialForwards();">
                         <div class="next-btn main-btn">Next</div>
-                        <div class="after-btn"><img src="./src/styles/svg/tutorial_arrow_right.svg" style="width: 30px;"></div>
+                        <div class="after-btn"><img src="./src/styles/svg/tutorial_arrow_right.svg" alt="" style="width: 30px;"></div>
                     </div>
                 </div>
 
@@ -193,7 +193,7 @@
                         <p>If you want to know more about it, check it out on GitHub by clicking <a class="bold" href="https://github.com/arminasbrazenas/PathVis3d"><i>here</i></a>.</p>
                     </div>
                     <div class="showcase">
-                        <img class="logo-img" src="./src/styles/svg/favicon.svg">
+                        <img class="logo-img" src="./src/styles/svg/favicon.svg" alt="">
                     </div>
                 </div>
 
@@ -208,7 +208,7 @@
                         <p><span class="bold">Click</span> on the <span class="bold">wall</span> to delete or drag while holding D to delete multiple walls.</p>
                     </div>
                     <div class="showcase">
-                        <img src="./src/styles/gif/controls.gif">
+                        <img src="./src/styles/gif/controls.gif" alt="">
                     </div>
                 </div>
 
@@ -225,7 +225,7 @@
                         <p>Remove all walls, path and set the start and finish node's positions to default by clicking the <span class="bold">Reset</span> button.</p>
                     </div>
                     <div class="showcase">
-                        <img src="./src/styles/gif/board.gif">
+                        <img src="./src/styles/gif/board.gif" alt="">
                     </div>
                 </div>
 
@@ -241,7 +241,7 @@
                         <p>Remove the path by clicking the <span class="bold">Clear</span> button.</p>
                     </div>
                     <div class="showcase">
-                        <img src="./src/styles/gif/pathfinding.gif">
+                        <img src="./src/styles/gif/pathfinding.gif" alt="">
                     </div>
                 </div>
 
@@ -254,7 +254,7 @@
                         <p>Hope you enjoy playing with this visualizer! If you encounter any problems, feel free to contact me on <a class="bold" href="https://github.com/arminasbrazenas/PathVis3d">GitHub</a>.</p>
                     </div>
                     <div class="showcase">
-                        <img src="./src/styles/gif/maze.gif">
+                        <img src="./src/styles/gif/maze.gif" alt="">
                     </div>
                 </div>
             </div>
