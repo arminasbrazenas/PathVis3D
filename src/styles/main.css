@@ -719,6 +719,9 @@ body {
         -ms-flex-direction: column;
             flex-direction: column;
   }
+  .tutorial-wrap .close {
+    display: none;
+  }
   .tutorial-wrap .text {
     width: 70%;
     height: auto;

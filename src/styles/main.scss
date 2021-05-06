@@ -599,6 +599,10 @@ body {
         height: 100vh;
         overflow: auto;
         flex-direction: column;
+        .close {
+            display: none;
+        }
+
         .text {
             width: 70%;
             height: auto;
