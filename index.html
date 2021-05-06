@@ -4,218 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" href="./src/styles/main.css">
-        <link rel="icon" type="image/png" href="./src/images/favicon.png"/>
+        <link rel="icon" type="image/svg" href="./src/styles/svg/favicon.svg"/>
         <title>PathVis3d</title>
     </head>
 
     <body>
-        <!--<div class="loader">
-            <div class="boxes">
-                <div class="box">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="box">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="box">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="box">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="loaded">
-            <div class="three-scene">
-                <div class="desktop">
-                    <div class="logo">PathVis3d</div>
-                    <button class="main-btn settings-btn" onclick="toggleSettings();">Settings</button>
-                    <button class="main-btn path-btn" onclick="findPath();">Find Path</button>
-                    <button class="main-btn help-btn" onclick="toggleTutorial();">Tutorial</button>
-                </div>
-
-                <div class="mobile">
-                    <div class="logo">PathVis3d</div>
-                    <button class="main-btn path-btn" onclick="findPath();">Find Path</button>
-                    <div class="hamburger-wrap" onclick="toggleSettings();">
-                        <div class="hamburger-menu"></div>
-                        <div class="hamburger-menu"></div>
-                        <div class="hamburger-menu"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="settings-overlay">
-                <button onclick="toggleSettings();" class="close settings"></button>
-                <h1 class="stg">Settings</h1>
-                <div class="search-container">
-                    <div class="type">Pathfinding: </div>
-                    <div class="search-algorithm-container">
-                        <div class="arrow-left" onclick="switchPickBackwards(`search-algorithms`, `current-search`);"></div>
-                        <button class="search-algorithms current-search" id="a-star-path">A* algorithm</button>
-                        <button class="search-algorithms" id="dfs-path">Depth First Search</button>
-                        <button class="search-algorithms" id="dijkstra-path">Dijkstra's algorithm</button>
-                        <button class="search-algorithms" id="bfs-path">Best First Search</button>
-                        <div class="arrow-right" onclick="switchPickForwards(`search-algorithms`, `current-search`);"></div>
-                    </div>
-                </div>
-    
-                <div class="maze-container">
-                    <div class="type">Maze Generation: </div>
-                    <div class="maze-algorithm-container">
-                        <div class="arrow-left" onclick="switchPickBackwards(`maze-algorithms`, `current-maze`);"></div>
-                        <button class="maze-algorithms" id="dfs-maze">Depth First Search</button>
-                        <button class="maze-algorithms" id="prims-maze">Prim's algorithm</button>
-                        <button class="maze-algorithms" id="kruskals-maze">Kruskal's algorithm</button>
-                        <button class="maze-algorithms current-maze" id="recursive-maze">Recursive division</button>
-                        <div class="arrow-right" onclick="switchPickForwards(`maze-algorithms`, `current-maze`);"></div>
-                    </div>
-                </div>
-
-                <div class="search-type-container">
-                    <div class="type">Search Type: </div>
-                    <div class="search-way-container">
-                        <div class="arrow-left" onclick="switchPickBackwards(`search-ways`, `current-search-way`);"></div>
-                        <button class="search-ways current-search-way" id="4">4 Directional</button>
-                        <button class="search-ways" id="8">8 Directional</button>
-                        <div class="arrow-right" onclick="switchPickForwards(`search-ways`, `current-search-way`);"></div>
-                    </div>
-                </div>
-    
-                <div class="search-speed-container">
-                    <div class="type">Search Speed:</div>
-                    <input type="range" min="1" max="10" value="9" step="1" class="slider" id ="search-speed-slider">
-                </div>
-
-                <div class="generation-speed-container">
-                    <div class="type">Generation Speed:</div>
-                    <input type="range" min="1" max="10" value="9" step="1" class="slider" id ="generation-speed-slider">
-                </div>
-
-                <div class="board-height-container">
-                    <div class="type">Board Height:</div>
-                    <div class="height-value"></div>
-                    <input type="range" min="3" max="75" value="35" step="2" class="slider" id ="height-slider">
-                </div>
-    
-                <div class="board-width-container">
-                    <div class="type">Board Width:</div>
-                    <div class="width-value"></div>
-                    <input type="range" min="3" max="75" value="35" step="2" class="slider" id ="width-slider">
-                </div>
-    
-                <h1 class="com">Commands</h1>
-                <div class="commands-container">
-                    <div><button class="command generate-maze-btn" onclick="generateMaze(); closeSettingsIfMobile();">Generate Maze</button></div>
-                    <div><button class="command" onclick="grid.clear(); closeSettingsIfMobile();">Clear Board</button></div>
-                    <div><button class="command" onclick="grid.reset(); closeSettingsIfMobile();">Reset Board</button></div>
-                    <div><button class="command" onclick="pathMesh.clear(); closeSettingsIfMobile();">Clear Path</button></div>
-                </div>
-            </div>
-
-            <div class="tutorial-container">
-                <button onclick="toggleTutorial();" class="close"></button>
-                <a href="https://github.com/arminasbrazenas/PathVis3d"><img class="github-logo" src="./src/images/github.png"></a>
-                <button class="previous-btn" onclick="switchTutorialBackwards();">Previous</button>
-                <button class="next-btn" onclick="switchTutorialForwards();">Next</button>
-
-                <div class="tutorial-pages current-page">
-                    <h1>What is PathVis3d?</h1>
-                    <p><span class="bold">PathVis3d</span> is a project created to visualize pathfinding and maze generation algorithms in 3D.</p>
-                    <p>If you want to know more about it, check it out on GitHub by clicking <a style="font-size: 18px;" class="hyperlink-word" href="https://github.com/arminasbrazenas/PathVis3d"><i>here</i></a> or on the icon in the bottom left.</p>
-                    <img class="logo-img" src="./src/images/favicon.png">
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Controls</h1>
-                    <p>Drag the mouse outside of the grid to rotate the view.</p>
-                    <p>Scroll to zoom in and out.</p>
-                    <p>Click the <span class="bold">Settings</span> button at the top of the screen to toggle the Settings menu.</p>
-                    <img class="gif" style="width: 625px; top: calc(50% + 25px);" src="./src/images/controls_gif.gif">
-                    <p></p>
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Adding Walls</h1>
-                    <p>Click and drag the mouse on the grid to create walls.</p>
-                    <p>Click on the wall to delete or drag while holding D to delete multiple walls.</p>
-                    <img class="gif" style="width: 625px; top: calc(50% + 25px);" src="./src/images/walls_gif.gif">
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Start and Finish positions</h1>
-                    <p>Drag the <span style="font-size: 18px; color:#E35234;">red</span> node to change the <span style="font-size: 18px; color:#E35234;">start</span> position.</p>
-                    <p>Drag the <span style="font-size: 18px; color:#539263;">green</span> node to change the <span style="font-size: 18px; color:#539263;">finish</span> position.</p>
-                    <img class="gif" style="width: 625px; top: calc(50% + 25px);" src="./src/images/position_gif.gif">
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Board</h1>
-                    <p>Change the board's size by moving the <span class="bold">Board Height</span> and 
-                    <span class="bold">Board Width</span> range sliders.</p>
-                    <img class="gif" style="width: 625px; top: calc(50% + 10px);" src="./src/images/board_gif.gif">
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Pathfinding</h1>
-                    <p><span class="bold">Pathfinding</span> is the plotting of the route between two points.</p>
-                    <img class="showcase-img" style="width: 425px; top: calc(50% + 10px);" src="./src/images/pathfinding1.png">
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Pathfinding</h1>
-                    <p>The current pathfinding algorithm can be changed in the <span class="bold">Settings</span> menu. To do so, click on the arrows or on the algorithm itself.</p>
-                    <img class="gif" style="width: 525px;" src="./src/images/pathfinding_gif1.gif">
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Pathfinding</h1>
-                    <p>In this application, pathfinding can be either 4 directional or 8 directional, as the user chooses.</p>
-                    <p>The cost of moving to the adjacent cell is 10, while to diagonal, it's 14.</p>
-                    <img class="gif" style="width: 525px;" src="./src/images/pathfinding_gif2.gif">
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Pathfinding</h1>
-                    <p>Pathfinding speed can be changed by moving the <span class="bold">Search Speed</span> range slider.</p>
-                    <img class="gif" style="width: 525px;" src="./src/images/pathfinding_gif3.gif">
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Pathfinding</h1>
-                    <p>To start the visualization of the current algorithm, click on the <span class="bold">Find Path</span> button in the top center.</p>
-                    <img class="gif" style="width: 625px; top: calc(50% + 10px);" src="./src/images/pathfinding_gif4.gif">
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Maze Generation</h1>
-                    <p>To visualize maze's generation, pick an algorithm, adjust its speed and click <span class="bold">Generate Maze</span> button.</p>
-                    <img class="gif" style="width: 625px; top: calc(50% + 10px);" src="./src/images/maze_gif.gif">
-                </div>
-
-                <div class="tutorial-pages">
-                    <h1>Other Commands</h1>
-                    <p><span class="bold">Clear Board</span> - removes all walls and pathfinding visualization.</p>
-                    <p><span class="bold">Reset Board</span> - removes all walls, pathfinding visualization and sets start node's as well as finish node's positions to default.</p>
-                    <p><span class="bold">Clear Path</span> - clears pathfinding visualization.</p>
-                    <img class="gif" style="width: 625px; top: calc(50% + 50px);" src="./src/images/commands_gif.gif">
-                </div>
-            </div>
-        </div>-->
-
         <div class="loader">
             <div class="boxes">
                 <div class="box">
@@ -380,28 +173,88 @@
             </div>
 
             <div class="tutorial-wrap">
-                <button onclick="toggleTutorial();" class="close"></button>
-                <a href="https://github.com/arminasbrazenas/PathVis3d"><img class="github-logo" src="./src/images/github.png"></a>
+                <button onclick="toggleTutorial(); pageSwitched();" class="close" style="right: 22px;"></button>
+                <div class="buttons">
+                    <div class="btn-wrap" onclick="switchTutorialBackwards();">
+                        <div class="after-btn"><img src="./src/styles/svg/tutorial_arrow_left.svg" style="width: 30px;"></div>
+                        <div class="main-btn">Previous</div>
+                    </div>
 
-                <div class="tutorial-page">
+                    <div class="btn-wrap" onclick="switchTutorialForwards();">
+                        <div class="next-btn main-btn">Next</div>
+                        <div class="after-btn"><img src="./src/styles/svg/tutorial_arrow_right.svg" style="width: 30px;"></div>
+                    </div>
+                </div>
+
+                <div class="tutorial-pages current">
                     <div class="text">
                         <h2>What is PathVis3d?</h2>
                         <p><span class="bold">PathVis3d</span> is a project created to visualize pathfinding and maze generation algorithms in 3D.</p>
-                        <p>If you want to know more about it, check it out on GitHub by clicking <a href="https://github.com/arminasbrazenas/PathVis3d"><i>here</i></a> or on the icon in the bottom left.</p>
+                        <p>If you want to know more about it, check it out on GitHub by clicking <a class="bold" href="https://github.com/arminasbrazenas/PathVis3d"><i>here</i></a>.</p>
                     </div>
                     <div class="showcase">
-                        <img class="logo-img" src="./src/images/favicon.png">
-                        <div class="buttons">
-                            <div class="btn-wrap">
-                                <div class="main-btn">Previous</div>
-                                <div class="after-btn"><img src="./src/styles/svg/reset_icon.svg"></div>
-                            </div>
-        
-                            <div class="btn-wrap">
-                                <div class="main-btn" >Next</div>
-                                <div class="after-btn"><img src="./src/styles/svg/clear_icon.svg"></div>
-                            </div>
-                        </div>
+                        <img class="logo-img" src="./src/styles/svg/favicon.svg">
+                    </div>
+                </div>
+
+                <div class="tutorial-pages">
+                    <div class="text">
+                        <h2>Controls</h2>
+                        <p><span class="bold">Drag</span> the mouse outside of the grid to rotate the view.</p>
+                        <p><span class="bold">Scroll</span> to zoom in and out.</p>
+
+                        <h2>Walls</h2>
+                        <p><span class="bold">Click</span> and drag the mouse on the <span class="bold">grid</span> to create walls.</p>
+                        <p><span class="bold">Click</span> on the <span class="bold">wall</span> to delete or drag while holding D to delete multiple walls.</p>
+                    </div>
+                    <div class="showcase">
+                        <img src="./src/styles/gif/controls.gif">
+                    </div>
+                </div>
+
+                <div class="tutorial-pages">
+                    <div class="text">
+                        <h2>Start and Finish positions</h2>
+                        <p>Drag the <span class="bold" style="color:#E35234;">red</span> node to change the <span class="bold" style="color:#E35234;">start</span> position.</p>
+                        <p>Drag the <span class="bold" style="color:#539263;">green</span> node to change the <span class="bold" style="color:#539263;">finish</span> position.</p>
+
+                        <h2>Board</h2>
+                        <p>All properties can be found in the <span class="bold">Board</span> dropdown menu.</p>
+                        <p>Change the board's size by moving the <span class="bold">Height</span> and <span class="bold">Width</span> range sliders.</p>
+                        <p>Remove all walls and path by clicking the <span class="bold">Clear</span> button.</p>
+                        <p>Remove all walls, path and set the start and finish node's positions to default by clicking the <span class="bold">Reset</span> button.</p>
+                    </div>
+                    <div class="showcase">
+                        <img src="./src/styles/gif/board.gif">
+                    </div>
+                </div>
+
+                <div class="tutorial-pages">
+                    <div class="text">
+                        <h2>Pathfinding</h2>
+                        <p>All properties can be found in the <span class="bold">Pathfinding</span> drop-down menu.</p>
+                        <p>To change the current pathfinding algorithm, click on the arrows or on the algorithm itself.</p>
+                        <p>In this application, pathfinding can be either 4 directional or 8 directional, as the user chooses.
+                        The cost of moving to the adjacent cell is 10, while to diagonal, it's 14.</p> 
+                        <p>Pathfinding speed can be changed by moving the <span class="bold">Speed</span> range slider.</p>
+                        <p>Start the visualization of the current algorithm by clicking the <span class="bold">Visualize</span> button.</p>
+                        <p>Remove the path by clicking the <span class="bold">Clear</span> button.</p>
+                    </div>
+                    <div class="showcase">
+                        <img src="./src/styles/gif/pathfinding.gif">
+                    </div>
+                </div>
+
+                <div class="tutorial-pages">
+                    <div class="text">
+                        <h2>Maze Generation</h2>
+                        <p>All properties can be found in the <span class="bold">Maze Generation</span> drop-down menu.</p>
+                        <p>Just like in pathfinding, you can change the current algorithm, it's speed and visualize by clicking the <span class="bold">Visualize</span> button.</p>
+                        <h2>Final Word</h2>
+                        <p>Hope you enjoy playing with this visualizer! If you encounter any problems, feel free to contact me on <a class="bold" href="https://github.com/arminasbrazenas/PathVis3d">GitHub</a>.</p>
+                    </div>
+                    <div class="showcase">
+                        <img src="./src/styles/gif/maze.gif">
                     </div>
                 </div>
             </div>
